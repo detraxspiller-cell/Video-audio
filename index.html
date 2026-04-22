@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Lab Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Media Lab Studio</h1>
+      <p>Audio↔Video tools, Text generators, and a Random video maker.</p>
+    </header>
+
+    <main>
+      <section class="card" id="audioToVideo">
+        <h2>Audio to Video</h2>
+        <input type="file" id="audioInput" accept="audio/*" />
+        <button id="makeAudioVideoBtn">Create Video from Audio</button>
+        <p class="hint">Creates a waveform-style video with your audio track.</p>
+      </section>
+
+      <section class="card" id="photoToVideo">
+        <h2>Photo to Video</h2>
+        <input type="file" id="photoInput" accept="image/*" />
+        <label>
+          Duration (seconds)
+          <input type="number" id="photoDuration" min="2" max="30" value="6" />
+        </label>
+        <button id="makePhotoVideoBtn">Create Video from Photo</button>
+      </section>
+
+      <section class="card" id="textToVideo">
+        <h2>Text to Video</h2>
+        <textarea id="videoText" rows="4" placeholder="Type scenes. One line = one frame"></textarea>
+        <button id="makeTextVideoBtn">Create Text Video</button>
+      </section>
+
+      <section class="card" id="textToPhoto">
+        <h2>Text to Photo</h2>
+        <textarea id="photoText" rows="3" placeholder="Type text for an image"></textarea>
+        <button id="makeTextPhotoBtn">Generate Image</button>
+      </section>
+
+      <section class="card" id="textToSpeech">
+        <h2>Text to Speech</h2>
+        <textarea id="speechText" rows="3" placeholder="Type text to speak"></textarea>
+        <button id="speakBtn">Speak Text</button>
+        <button id="stopSpeakBtn">Stop</button>
+      </section>
+
+      <section class="card" id="randomVideo">
+        <h2>Random Video Generator</h2>
+        <label>
+          Length (seconds)
+          <input type="number" id="randomDuration" min="2" max="20" value="8" />
+        </label>
+        <button id="makeRandomVideoBtn">Generate Random Video</button>
+      </section>
+    </main>
+
+    <section id="output" class="card output">
+      <h2>Output</h2>
+      <video id="previewVideo" controls hidden></video>
+      <img id="previewImage" alt="Generated image" hidden />
+      <audio id="previewAudio" controls hidden></audio>
+      <a id="downloadLink" hidden download>Download Result</a>
+      <p id="status">Ready.</p>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
