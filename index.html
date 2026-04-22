@@ -3,66 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Media Lab Studio</title>
+    <title>AI Toolkit Hub — Free AI Tools</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1>Media Lab Studio</h1>
-      <p>Audio↔Video tools, Text generators, and a Random video maker.</p>
+    <header class="topbar">
+      <div class="brand">AI Toolkit Hub</div>
+      <nav>
+        <a href="#chat">AI Chat</a>
+        <a href="#image">Image Generator</a>
+        <a href="#speech">Text to Speech</a>
+        <a href="#directory">Tool Directory</a>
+      </nav>
+      <button id="themeToggle" class="ghost">Toggle Theme</button>
     </header>
 
+    <section class="hero">
+      <p class="pill">No signup • No login • Free forever</p>
+      <h1>Free AI Assistant + Creative Tools in One Place</h1>
+      <p>
+        Chat with AI models, generate images, create voiceovers, and explore a large
+        collection of helper tools.
+      </p>
+      <div class="hero-metrics">
+        <div><strong>4.6/5</strong><span>User Rating</span></div>
+        <div><strong>1000+</strong><span>Available Tools</span></div>
+        <div><strong>99+</strong><span>Languages</span></div>
+      </div>
+    </section>
+
     <main>
-      <section class="card" id="audioToVideo">
-        <h2>Audio to Video</h2>
-        <input type="file" id="audioInput" accept="audio/*" />
-        <button id="makeAudioVideoBtn">Create Video from Audio</button>
-        <p class="hint">Creates a waveform-style video with your audio track.</p>
-      </section>
-
-      <section class="card" id="photoToVideo">
-        <h2>Photo to Video</h2>
-        <input type="file" id="photoInput" accept="image/*" />
+      <section class="card" id="chat">
+        <h2>Free AI Chat</h2>
         <label>
-          Duration (seconds)
-          <input type="number" id="photoDuration" min="2" max="30" value="6" />
+          Model
+          <select id="modelSelect">
+            <option>GPT-5.2</option>
+            <option>Gemini Flash</option>
+            <option>Qwen 3</option>
+            <option>Llama 4</option>
+          </select>
         </label>
-        <button id="makePhotoVideoBtn">Create Video from Photo</button>
+        <div id="chatLog" class="chat-log" aria-live="polite"></div>
+        <textarea id="chatPrompt" rows="3" placeholder="Ask anything..."></textarea>
+        <button id="sendChatBtn">Send</button>
       </section>
 
-      <section class="card" id="textToVideo">
-        <h2>Text to Video</h2>
-        <textarea id="videoText" rows="4" placeholder="Type scenes. One line = one frame"></textarea>
-        <button id="makeTextVideoBtn">Create Text Video</button>
+      <section class="card" id="image">
+        <h2>AI Image Generator</h2>
+        <textarea id="imagePrompt" rows="2" placeholder="Describe the image..."></textarea>
+        <label>
+          Style
+          <select id="imageStyle">
+            <option>Realistic</option>
+            <option>Digital Art</option>
+            <option>Anime</option>
+            <option>Cinematic</option>
+            <option>Pixel Art</option>
+          </select>
+        </label>
+        <button id="makeImageBtn">Generate Image</button>
       </section>
 
-      <section class="card" id="textToPhoto">
-        <h2>Text to Photo</h2>
-        <textarea id="photoText" rows="3" placeholder="Type text for an image"></textarea>
-        <button id="makeTextPhotoBtn">Generate Image</button>
-      </section>
-
-      <section class="card" id="textToSpeech">
+      <section class="card" id="speech">
         <h2>Text to Speech</h2>
-        <textarea id="speechText" rows="3" placeholder="Type text to speak"></textarea>
-        <button id="speakBtn">Speak Text</button>
-        <button id="stopSpeakBtn">Stop</button>
+        <textarea id="speechText" rows="3" placeholder="Type text for voiceover"></textarea>
+        <div class="inline-actions">
+          <button id="speakBtn">Speak</button>
+          <button id="stopSpeakBtn" class="ghost">Stop</button>
+        </div>
       </section>
 
-      <section class="card" id="randomVideo">
-        <h2>Random Video Generator</h2>
-        <label>
-          Length (seconds)
-          <input type="number" id="randomDuration" min="2" max="20" value="8" />
-        </label>
-        <button id="makeRandomVideoBtn">Generate Random Video</button>
+      <section class="card" id="removeBg">
+        <h2>Background Remover (Basic)</h2>
+        <input type="file" id="bgInput" accept="image/*" />
+        <p class="hint">Removes bright/near-white background pixels for quick transparent PNGs.</p>
+        <button id="removeBgBtn">Remove Background</button>
+      </section>
+
+      <section class="card" id="transcribe">
+        <h2>Audio to Text</h2>
+        <input type="file" id="audioInput" accept="audio/*" />
+        <button id="transcribeBtn">Transcribe Audio</button>
+        <textarea id="transcriptOutput" rows="4" readonly placeholder="Transcription appears here"></textarea>
+      </section>
+
+      <section class="card" id="extra">
+        <h2>Extra: Prompt Improver</h2>
+        <textarea id="rawPrompt" rows="3" placeholder="Paste a rough prompt..."></textarea>
+        <button id="improvePromptBtn">Improve Prompt</button>
+        <textarea id="improvedPrompt" rows="5" readonly placeholder="Improved prompt output"></textarea>
       </section>
     </main>
 
+    <section id="directory" class="card directory">
+      <div class="directory-head">
+        <h2>Tool Directory</h2>
+        <input id="toolSearch" type="search" placeholder="Search tools..." />
+      </div>
+      <div id="toolGrid" class="tool-grid"></div>
+    </section>
+
     <section id="output" class="card output">
       <h2>Output</h2>
-      <video id="previewVideo" controls hidden></video>
-      <img id="previewImage" alt="Generated image" hidden />
+      <img id="previewImage" alt="Generated result" hidden />
       <audio id="previewAudio" controls hidden></audio>
       <a id="downloadLink" hidden download>Download Result</a>
       <p id="status">Ready.</p>

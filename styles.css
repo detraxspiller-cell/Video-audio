@@ -1,75 +1,174 @@
 :root {
-  color-scheme: dark;
-  font-family: Inter, system-ui, sans-serif;
+  --bg: #0c1020;
+  --surface: #121a2d;
+  --surface-2: #1a2640;
+  --text: #e8eeff;
+  --muted: #9ab0dd;
+  --primary: #5f8cff;
+  --primary-hover: #7da2ff;
+  --border: #2b3f66;
 }
+
+body.light {
+  --bg: #f3f6ff;
+  --surface: #ffffff;
+  --surface-2: #eef3ff;
+  --text: #14213d;
+  --muted: #4a628a;
+  --primary: #2f64ff;
+  --primary-hover: #4474ff;
+  --border: #c7d4f5;
+}
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: #0d1117;
-  color: #e6edf3;
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1a2a4a, var(--bg) 30%);
+  color: var(--text);
 }
 
-header {
-  padding: 1.25rem;
-  border-bottom: 1px solid #30363d;
+.topbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: color-mix(in oklab, var(--bg) 70%, black 30%);
+  border-bottom: 1px solid var(--border);
 }
+
+.topbar nav { display: flex; gap: 1rem; flex-wrap: wrap; }
+.topbar a { color: var(--muted); text-decoration: none; }
+.brand { font-weight: 700; }
+
+.hero {
+  max-width: 1100px;
+  margin: 1.2rem auto;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1f2e54, var(--surface));
+}
+
+.pill {
+  display: inline-block;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.hero-metrics { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-metrics div {
+  min-width: 140px;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface) 88%, white 12%);
+}
+.hero-metrics strong { display: block; font-size: 1.4rem; }
+.hero-metrics span { color: var(--muted); font-size: 0.9rem; }
 
 main {
+  max-width: 1100px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .card {
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
   padding: 1rem;
 }
 
 textarea,
 input,
+select,
 button {
   width: 100%;
-  margin: 0.4rem 0;
-  box-sizing: border-box;
-  border-radius: 8px;
-  border: 1px solid #30363d;
-  background: #0d1117;
-  color: #e6edf3;
+  margin: 0.45rem 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
   padding: 0.65rem;
 }
 
 button {
   cursor: pointer;
-  background: #1f6feb;
   border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
 }
 
-button:hover {
-  background: #388bfd;
+button:hover { background: var(--primary-hover); }
+button.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.inline-actions { display: flex; gap: 0.6rem; }
+.chat-log {
+  min-height: 120px;
+  max-height: 240px;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 0.6rem;
+  background: var(--surface-2);
+}
+.chat-log p { margin: 0.45rem 0; }
+.chat-log .user { color: #9ad6ff; }
+.chat-log .assistant { color: #ffd09b; }
+
+.directory {
+  max-width: 1100px;
+  margin: 1rem auto;
+}
+.directory-head {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.directory-head input { max-width: 280px; }
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.7rem;
+}
+.tool {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.55rem;
+  background: var(--surface-2);
 }
 
 .output {
-  margin: 1rem;
+  max-width: 1100px;
+  margin: 1rem auto 2rem;
 }
-
-video,
-img,
-audio {
+#previewImage {
   width: 100%;
-  margin-top: 0.75rem;
+  max-height: 480px;
+  object-fit: contain;
   border-radius: 10px;
+  margin-top: 0.75rem;
 }
-
 #downloadLink {
   display: inline-block;
   margin-top: 0.75rem;
-  color: #58a6ff;
+  color: #9cc1ff;
 }
-
-.hint {
-  font-size: 0.9rem;
-  color: #9da7b2;
-}
+.hint { color: var(--muted); font-size: 0.88rem; }
